@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cycling Performance Dashboard</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">INTERVALS.ICU · LIVE DATA</p>
+        <h1>Performance Dashboard</h1>
+        <p id="subtitle" class="muted">Se încarcă datele…</p>
+      </div>
+      <button id="refreshBtn" class="refresh">↻ Actualizează</button>
+    </header>
+
+    <main>
+      <section class="metrics" aria-label="Metrici curente">
+        <article class="metric">
+          <span class="metric-label">Fitness</span>
+          <strong id="fitness">—</strong>
+          <span class="metric-note">CTL · 42 zile</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Fatigue</span>
+          <strong id="fatigue">—</strong>
+          <span class="metric-note">ATL · 7 zile</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Form</span>
+          <strong id="form">—</strong>
+          <span id="formText" class="metric-note">CTL − ATL</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Ramp Rate</span>
+          <strong id="ramp">—</strong>
+          <span class="metric-note">fitness / săptămână</span>
+        </article>
+        <article class="metric">
+          <span class="metric-label">Weight</span>
+          <strong id="weight">—</strong>
+          <span class="metric-note">kg</span>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">PERFORMANCE MANAGEMENT CHART</p>
+            <h2>Fitness & Fatigue</h2>
+          </div>
+          <div class="legend">
+            <span><i class="dot fitness-dot"></i> Fitness</span>
+            <span><i class="dot fatigue-dot"></i> Fatigue</span>
+          </div>
+        </div>
+        <div class="chart-wrap large">
+          <canvas id="pmcChart"></canvas>
+          <div id="pmcTooltip" class="tooltip hidden"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">TRAINING STRESS BALANCE</p>
+            <h2>Form</h2>
+          </div>
+          <div class="form-zones">
+            <span>Fresh</span>
+            <span>Optimal</span>
+            <span>High Risk</span>
+          </div>
+        </div>
+        <div class="chart-wrap form-chart">
+          <canvas id="formChart"></canvas>
+        </div>
+      </section>
+
+      <section class="two-col">
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">LOAD PROGRESSION</p>
+              <h2>Ramp Rate</h2>
+            </div>
+          </div>
+          <div class="chart-wrap compact">
+            <canvas id="rampChart"></canvas>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">BODY MASS</p>
+              <h2>Weight</h2>
+            </div>
+          </div>
+          <div class="weight-box">
+            <strong id="weightLarge">—</strong>
+            <span>kg</span>
+          </div>
+          <p class="muted small">
+            Se folosește ultima greutate disponibilă din wellness sau profil.
+          </p>
+        </article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">LATEST RIDES</p>
+            <h2>Activități recente</h2>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Activitate</th>
+                <th>Data</th>
+                <th>Distanță</th>
+                <th>Timp</th>
+                <th>Elevation</th>
+                <th>Load</th>
+                <th>HR</th>
+                <th>Power</th>
+              </tr>
+            </thead>
+            <tbody id="activityRows">
+              <tr><td colspan="8" class="loading-cell">Se încarcă…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div id="errorBox" class="error hidden"></div>
+    </main>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
